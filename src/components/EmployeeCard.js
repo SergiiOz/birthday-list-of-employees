@@ -1,5 +1,15 @@
-const EmployeeCard = () => {
-    return(<div>EmployeeCard</div>)
-}
+import PropTypes from "prop-types";
 
-export default EmployeeCard
+const EmployeeCard = ({ employee }) => {
+  return (
+    <li>
+      {employee.firstName} {employee.lastName}
+    </li>
+  );
+};
+
+EmployeeCard.propTypes = {
+  employee: PropTypes.object,
+};
+
+export default EmployeeCard;

@@ -1,0 +1,12 @@
+.container {
+  display: flex;
+  padding: 0 10px;
+}
+
+.employees-list {
+  width: 50%;
+}
+
+.employees-birthday {
+  flex: 1 1 auto;
+}

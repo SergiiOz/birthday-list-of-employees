@@ -1,28 +1,20 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getEmployees } from './actions/actionCreators';
-import './App.css';
-import Spinner from './components/Spiner/Spinner';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getEmployees } from "./actions/actionCreators";
+import "./App.css";
+import EmployeesList from "./components/EmployeesList";
+import EmployeesBirthday from "./components/EmployeesBirthday";
 
 const App = () => {
-  //get all amployees
-  const employees = useSelector((state) => state.employees.listEmployees);
   const dispatch = useDispatch();
 
+  //fetch Employees List
   useEffect(() => dispatch(getEmployees()), []);
-  console.log('employees', employees);
+
   return (
     <div className="container">
-      {' '}
-      <ol>
-        {employees ? (
-          employees.map((employee) => (
-            <li key={employee.id}>{employee.firstName}</li>
-          ))
-        ) : (
-          <Spinner />
-        )}
-      </ol>
+      <EmployeesList />
+      <EmployeesBirthday />
     </div>
   );
 };
