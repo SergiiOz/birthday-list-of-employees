@@ -3,12 +3,17 @@
   padding: 0 10px;
 }
 
+.title {
+  text-align: center;
+}
+
 .employees-list {
   width: 50%;
 }
 
 .employees-birthday {
   flex: 1 1 auto;
+  border-left: 3px solid lightgray;
 }
 
 .active {
