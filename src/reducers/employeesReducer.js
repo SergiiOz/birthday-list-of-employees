@@ -2,6 +2,7 @@ import { FETCH_EMPLOYEES } from '../actions/actionTypes';
 
 let initialState = {
   listEmployees: [],
+  activatedEmployees: [],
 };
 
 export const employeesReducer = (state = initialState, action) => {

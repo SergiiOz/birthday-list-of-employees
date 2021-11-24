@@ -1,45 +1,47 @@
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import EmployeeCard from "./EmployeeCard";
-import Spinner from "./Spiner/Spinner";
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import EmployeeCard from './EmployeeCard';
+import Spinner from './Spiner/Spinner';
 
 const EmployeesList = () => {
   const [sortedList, setSortedList] = useState([]);
+  console.log(sortedList);
   //get employees from state
   const employees = useSelector((state) => state.employees.listEmployees);
 
   const alphabet = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'q',
+    'r',
+    's',
+    't',
+    'u',
+    'v',
+    'w',
+    'x',
+    'y',
+    'z',
   ];
 
   //sort list users by char of alphabet
   const sortListByAlphabet = (arrlistUsers, arrAlphabet) => {
+    //new array
     const sortedList = [];
 
     arrAlphabet.forEach((char) => {
@@ -49,36 +51,43 @@ const EmployeesList = () => {
           (user) => user.firstName[0].toLowerCase() === char
         ),
       };
+      //push to new array
       sortedList.push(sortedUsers);
     });
 
     return sortedList;
   };
 
-  const onSorted = () => {
-    const sortListUsers = sortListByAlphabet(employees, alphabet);
-    setSortedList(sortListUsers);
-  };
+  //one time sorted list and set to sorted
+  useEffect(() => {
+    const sortedListUsers = sortListByAlphabet(employees, alphabet);
+    setSortedList(sortedListUsers);
+  }, [employees]);
 
   return (
     <div className="employees-list">
       <h3 className="title">Employees</h3>
-      <div>
-        {/* below code with button for testing sort list */}
-        <button onClick={onSorted}>Sort</button>
-        {JSON.stringify(sortedList)}
-        {/* above code for testing */}
+      {/*will set Spinner leter - show when wait data */}
 
-        {/* sorted all list users by alphabet */}
-        {employees ? (
-          employees
-            .sort((a, b) => (a.firstName > b.firstName ? 1 : -1))
-            .map((employee) => (
-              <EmployeeCard key={employee.id} employee={employee} />
-            ))
-        ) : (
-          <Spinner />
-        )}
+      <div className="employees-list-content">
+        {sortedList.map((columnChar, index) => {
+          return (
+            <div key={index} className="charColumn">
+              <h3 className="title">{columnChar.letter}</h3>
+              {/* if char doesn't have list  */}
+              {columnChar.list.length === 0 ? (
+                <div className="employee-card empty">
+                  Employess List is empty
+                </div>
+              ) : (
+                //under char show employees list
+                columnChar.list.map((employee) => (
+                  <EmployeeCard key={employee.id} employee={employee} />
+                ))
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

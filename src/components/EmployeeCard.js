@@ -9,7 +9,7 @@ const EmployeeCard = ({ employee }) => {
   };
 
   return (
-    <div>
+    <div className="employee-card">
       <h4 className={status === 'true' ? 'active' : ''}>
         {employee.firstName} {employee.lastName}
       </h4>
