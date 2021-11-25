@@ -1,16 +1,29 @@
-import PropTypes from 'prop-types';
-import { useState } from 'react';
+import PropTypes from "prop-types";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { selectEmployee, unSelectEmployee } from "./../actions/actionCreators";
 
 const EmployeeCard = ({ employee }) => {
-  const [status, setStatus] = useState('false');
+  const [isActive, setIsActive] = useState("false");
+  const dispatch = useDispatch();
 
+  //get change from radio buttons
   const onChangeStatus = (event) => {
-    setStatus(event.currentTarget.value);
+    setIsActive(event.target.value);
+
+    //add employee in Birthday list
+    if (event.target.value === "true") {
+      dispatch(selectEmployee(employee));
+    }
+    //remove employee from Birthday list
+    if (event.target.value === "false") {
+      dispatch(unSelectEmployee(employee));
+    }
   };
 
   return (
     <div className="employee-card">
-      <h4 className={status === 'true' ? 'active' : ''}>
+      <h4 className={isActive === "true" ? "active" : ""}>
         {employee.firstName} {employee.lastName}
       </h4>
       {/* RADIO BUTTONS */}
@@ -22,9 +35,9 @@ const EmployeeCard = ({ employee }) => {
               type="radio"
               value="false"
               name="status"
-              checked={status === 'false'}
+              checked={isActive === "false"}
               onChange={onChangeStatus}
-            />{' '}
+            />{" "}
             Not Active
           </label>
         </div>
@@ -35,14 +48,14 @@ const EmployeeCard = ({ employee }) => {
               type="radio"
               value="true"
               name="status"
-              checked={status === 'true'}
+              checked={isActive === "true"}
               onChange={onChangeStatus}
-            />{' '}
+            />{" "}
             Active
           </label>
         </div>
       </div>
-      {status}
+      {isActive}
     </div>
   );
 };

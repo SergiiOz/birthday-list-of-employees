@@ -1,20 +1,24 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { getEmployees } from "./actions/actionCreators";
 import "./App.css";
 import EmployeesList from "./components/EmployeesList";
-import EmployeesBirthday from "./components/EmployeesBirthday";
+import EmployeesBirthdayList from "./components/EmployeesBirthdayList";
 
 const App = () => {
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
 
   //fetch Employees List
-  useEffect(() => dispatch(getEmployees()), []);
+  useEffect(() => {
+    dispatch(getEmployees());
+    setIsLoading(false);
+  }, []);
 
   return (
     <div className="container">
-      <EmployeesList />
-      <EmployeesBirthday />
+      <EmployeesList isLoading={isLoading} />
+      <EmployeesBirthdayList />
     </div>
   );
 };

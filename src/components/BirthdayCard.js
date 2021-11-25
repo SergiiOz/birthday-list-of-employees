@@ -1,12 +1,10 @@
-const BirthdayCard = ({
-  selectedEmployee = { firstName: 'empty', lastName: 'empty', dob: 'emptye' },
-}) => {
+const BirthdayCard = ({ selectedEmployee }) => {
   return (
     <div className="birthday-card">
       <h4>
         {selectedEmployee.firstName} {selectedEmployee.lastName}
       </h4>
-      <p>{selectedEmployee.dob}</p>
+      <p>Birthday: {selectedEmployee.dob}</p>
     </div>
   );
 };
