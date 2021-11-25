@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import BirthdayCard from "./BirthdayCard";
@@ -41,6 +42,10 @@ const EmployeesBirthdayList = () => {
       )}
     </div>
   );
+};
+
+EmployeesBirthdayList.propTypes = {
+  selectedEmployees: PropTypes.array,
 };
 
 export default EmployeesBirthdayList;

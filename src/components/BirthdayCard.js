@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const BirthdayCard = ({ selectedEmployee }) => {
   return (
     <div className="birthday-card">
@@ -7,6 +9,10 @@ const BirthdayCard = ({ selectedEmployee }) => {
       <p>Birthday: {selectedEmployee.dob}</p>
     </div>
   );
+};
+
+BirthdayCard.propTypes = {
+  employee: PropTypes.object,
 };
 
 export default BirthdayCard;

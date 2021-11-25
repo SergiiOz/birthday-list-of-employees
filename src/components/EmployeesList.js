@@ -1,16 +1,17 @@
+import PropTypes from "prop-types";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import PropTypes from "prop-types";
-import EmployeeCard from "./EmployeeCard";
+import CharList from "./CharList";
 import Spinner from "./Spiner/Spinner";
 
 const EmployeesList = ({ isLoading }) => {
   //sort list users by char of alphabet
   const [sortedList, setSortedList] = useState([]);
-  console.log(sortedList);
+
   //get employees from state redux
   const employees = useSelector((state) => state.employees.listEmployees);
 
+  //array alphabet
   const alphabet = [
     "a",
     "b",
@@ -40,7 +41,7 @@ const EmployeesList = ({ isLoading }) => {
     "z",
   ];
 
-  //sort list users by char of alphabet
+  //func sort list users by char of alphabet
   const sortListByAlphabet = (arrlistUsers, arrAlphabet) => {
     //new array
     const sortedList = [];
@@ -60,6 +61,7 @@ const EmployeesList = ({ isLoading }) => {
   };
 
   //one time sorted list and set to sortedList
+  //leter will be use useMemo()
   useEffect(() => {
     const sortedListUsers = sortListByAlphabet(employees, alphabet);
     setSortedList(sortedListUsers);
@@ -76,29 +78,19 @@ const EmployeesList = ({ isLoading }) => {
       )}
 
       {/* EMPLOYEES LIST CONTENT */}
+      {/*charWithListEmployees - object with 2 field (letter and list) */}
+      {/* letter: - it's char alphabet (list: - it's array sorted objects employees by letter */}
+
       <div className="employees-list-content">
-        {sortedList.map((columnChar, index) => {
-          {
-            /* COLUMN CHAR with list employees  */
-          }
-          return (
-            <div key={index + columnChar} className="charColumn">
-              <h3 className="title">{columnChar.letter}</h3>
-              {/* if char doesn't have list  = show text */}
-              {columnChar.list.length === 0 ? (
-                <div className="employee-card empty">
-                  Employess List is empty
-                </div>
-              ) : (
-                //else bolow char show employees list
-                //will make a separete component
-                columnChar.list.map((employee) => (
-                  <EmployeeCard key={employee.id} employee={employee} />
-                ))
-              )}
-            </div>
-          );
-        })}
+        {sortedList.length !== 0 &&
+          sortedList.map((charWithListEmployees, index) => {
+            return (
+              <CharList
+                key={index + charWithListEmployees.letter}
+                charWithListEmployees={charWithListEmployees}
+              />
+            );
+          })}
       </div>
     </div>
   );
@@ -106,6 +98,7 @@ const EmployeesList = ({ isLoading }) => {
 
 EmployeesList.propTypes = {
   employees: PropTypes.array,
+  isLoading: PropTypes.bool,
 };
 
 export default EmployeesList;
