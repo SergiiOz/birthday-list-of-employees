@@ -2,17 +2,23 @@ import {
   FETCH_EMPLOYEES,
   SELECT_EMPLOYEE,
   UNSELECT_EMPLOYEE,
-} from "./actionTypes";
-import yaltisAPI from "./../api/yaltisAPI";
+} from './actionTypes';
+import yaltisAPI from './../api/yaltisAPI';
 
 //fetch employees list
 export const getEmployees = () => {
   return async (dispatch) => {
     const response = await yaltisAPI.get();
 
+    //add 'isActive = false' to every users
+    const listWithAddedIsActive = response.data;
+    for (const element of listWithAddedIsActive) {
+      element.isActive = false;
+    }
+
     dispatch({
       type: FETCH_EMPLOYEES,
-      payload: response.data,
+      payload: listWithAddedIsActive,
     });
   };
 };

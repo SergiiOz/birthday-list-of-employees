@@ -1,8 +1,8 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import CharList from "./CharList";
-import Spinner from "./Spiner/Spinner";
+import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import CharList from './CharList';
+import Spinner from './Spiner/Spinner';
 
 const EmployeesList = ({ isLoading }) => {
   //sort list users by char of alphabet
@@ -13,32 +13,32 @@ const EmployeesList = ({ isLoading }) => {
 
   //array alphabet
   const alphabet = [
-    "a",
-    "b",
-    "c",
-    "d",
-    "e",
-    "f",
-    "g",
-    "h",
-    "i",
-    "j",
-    "k",
-    "l",
-    "m",
-    "n",
-    "o",
-    "p",
-    "q",
-    "r",
-    "s",
-    "t",
-    "u",
-    "v",
-    "w",
-    "x",
-    "y",
-    "z",
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'q',
+    'r',
+    's',
+    't',
+    'u',
+    'v',
+    'w',
+    'x',
+    'y',
+    'z',
   ];
 
   //func sort list users by char of alphabet
@@ -67,13 +67,15 @@ const EmployeesList = ({ isLoading }) => {
     setSortedList(sortedListUsers);
   }, [employees]);
 
+  console.log(sortedList);
+
   return (
     <div className="employees-list">
       <h3 className="title">Employees</h3>
       {/*Spinner show when wait upload data */}
       {isLoading && (
         <div>
-          Loading... <Spinner />{" "}
+          Loading... <Spinner />{' '}
         </div>
       )}
 
