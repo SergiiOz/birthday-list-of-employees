@@ -2,11 +2,11 @@ import {
   FETCH_EMPLOYEES,
   SELECT_EMPLOYEE,
   UNSELECT_EMPLOYEE,
-} from "../actions/actionTypes";
+} from '../actions/actionTypes';
 
 let initialState = {
   listEmployees: [],
-  activatedEmployees: [],
+  isLoading: true,
 };
 
 export const employeesReducer = (state = initialState, action) => {
@@ -19,16 +19,24 @@ export const employeesReducer = (state = initialState, action) => {
     case SELECT_EMPLOYEE:
       return {
         ...state,
-        activatedEmployees: [...state.activatedEmployees, action.payload],
+        //if user.id from list === id from action -> change isActive = true
+        listEmployees: state.listEmployees.map((user) => {
+          if (user.id === action.payload.id) {
+            return { ...user, isActive: true };
+          }
+          return user;
+        }),
       };
     case UNSELECT_EMPLOYEE:
       return {
         ...state,
-        activatedEmployees: [
-          ...state.activatedEmployees.filter(
-            (employee) => employee.id !== action.payload.id
-          ),
-        ],
+        //if user.id from list === id from action -> change isActive = false
+        listEmployees: state.listEmployees.map((user) => {
+          if (user.id === action.payload.id) {
+            return { ...user, isActive: false };
+          }
+          return user;
+        }),
       };
     default:
       return state;
