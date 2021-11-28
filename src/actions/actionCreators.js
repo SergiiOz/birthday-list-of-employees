@@ -11,10 +11,9 @@ export const getEmployees = () => {
     const response = await yaltisAPI.get();
 
     //add 'isActive = false' to every users
-    const listWithAddedIsActive = response.data;
-    for (const element of listWithAddedIsActive) {
-      element.isActive = false;
-    }
+    const listWithAddedIsActive = response.data.map((element) => {
+      return { isActive: false, ...element };
+    });
 
     dispatch({
       type: FETCH_EMPLOYEES,
