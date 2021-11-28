@@ -1,15 +1,15 @@
-import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import BirthdayCard from "./BirthdayCard";
+import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import BirthdayCard from './BirthdayCard';
 
 const EmployeesBirthdayList = () => {
   //sorted list selected employees
   const [sortedSelectedEmloyees, setSortedSelectedEmloyees] = useState([]);
 
-  //get selected Employees from statue redux
-  const selectedEmployees = useSelector(
-    (state) => state.employees.activatedEmployees
+  //get selected Employees from statue redux (if employee.isActive === true)
+  const selectedEmployees = useSelector((state) =>
+    state.employees.listEmployees.filter((user) => user.isActive === true)
   );
 
   //sort list by lastName
@@ -34,6 +34,7 @@ const EmployeesBirthdayList = () => {
         <div className="employee-card empty">Employess List is empty</div>
       ) : (
         sortedSelectedEmloyees.map((selectedEmployee) => (
+          //THE BIRTHDAY CARD of the One Employee
           <BirthdayCard
             key={selectedEmployee.id}
             selectedEmployee={selectedEmployee}
