@@ -14,10 +14,8 @@ const EmployeesBirthdayList = () => {
 
   //sort list by lastName
   const sortList = (arr) => {
-    const sortedArray = [...arr];
-
-    sortedArray.sort((a, b) => (a.lastName > b.lastName ? 1 : -1));
-    return sortedArray;
+    const sordetArray = arr.sort((a, b) => (a.lastName > b.lastName ? 1 : -1));
+    return sordetArray;
   };
 
   //when selected list form state redux change - sort list again

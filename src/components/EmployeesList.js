@@ -4,12 +4,13 @@ import { useSelector } from 'react-redux';
 import CharList from './CharList';
 import Spinner from './Spiner/Spinner';
 
-const EmployeesList = ({ isLoading }) => {
+const EmployeesList = () => {
   //sort list users by char of alphabet
   const [sortedList, setSortedList] = useState([]);
 
   //get employees from state redux
   const employees = useSelector((state) => state.employees.listEmployees);
+  const isLoading = useSelector((state) => state.employees.isLoading);
 
   //array alphabet
   const alphabet = [
@@ -69,15 +70,17 @@ const EmployeesList = ({ isLoading }) => {
 
   console.log(sortedList);
 
+  //Spinner show when wait upload data
+  if (isLoading)
+    return (
+      <div>
+        Loading... <Spinner />{' '}
+      </div>
+    );
+
   return (
     <div className="employees-list">
       <h3 className="title">Employees</h3>
-      {/*Spinner show when wait upload data */}
-      {isLoading && (
-        <div>
-          Loading... <Spinner />{' '}
-        </div>
-      )}
 
       {/* EMPLOYEES LIST CONTENT */}
       {/*charWithListEmployees - object with 2 field (letter and list) */}

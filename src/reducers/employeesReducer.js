@@ -15,6 +15,7 @@ export const employeesReducer = (state = initialState, action) => {
       return {
         ...state,
         listEmployees: action.payload,
+        isLoading: false,
       };
     case SELECT_EMPLOYEE:
       return {
