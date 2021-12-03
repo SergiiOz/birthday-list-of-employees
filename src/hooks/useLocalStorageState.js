@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 //custom Hook
-const useLocalStorageState = (key, defaultValue = '') => {
+export const useLocalStorageState = (key, defaultValue = '') => {
   const [state, setState] = useState(() => {
     //lazy initialName
     const valueInLocalStorage = window.localStorage.getItem(key);
@@ -17,4 +17,3 @@ const useLocalStorageState = (key, defaultValue = '') => {
 
   return [state, setState];
 };
-q;

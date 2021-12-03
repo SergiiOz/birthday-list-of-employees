@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getEmployees } from './actions/actionCreators';
 import './App.css';
@@ -7,9 +7,8 @@ import EmployeesBirthdayList from './components/EmployeesBirthdayList';
 
 const App = () => {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(true);
 
-  //fetch Employees List
+  // //fetch Employees List
   useEffect(() => {
     dispatch(getEmployees());
   }, []);

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useLocalStorageState } from '../hooks/useLocalStorageState';
 import CharList from './CharList';
 import Spinner from './Spiner/Spinner';
 
@@ -11,6 +12,10 @@ const EmployeesList = () => {
   //get employees from state redux
   const employees = useSelector((state) => state.employees.listEmployees);
   const isLoading = useSelector((state) => state.employees.isLoading);
+
+  //save data in localStorage - but now I don't know how take this data and use )))
+  const [state, setState] = useLocalStorageState('emloyees', sortedList);
+  useEffect(() => setState(employees), [employees]);
 
   //array alphabet
   const alphabet = [
